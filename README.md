@@ -1,2 +1,2 @@
 # WellNext
-# A healthcare Management Application
+A healthcare Management Application
