@@ -1,5 +1,5 @@
 "use client"
-
+import Image from "next/image";
 import React from 'react'
 import {
   Form,
@@ -13,6 +13,8 @@ import {
 import { Input } from "@/components/ui/input"
 import { FormFieldType } from './forms/PatientForm'
 import { Control } from 'react-hook-form'
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 interface CustomProps {
   control: Control<any>,
@@ -30,13 +32,49 @@ interface CustomProps {
 }
 
 const RenderField =({ field, props }: {field: any; props: CustomProps})=> {
-  return (
-    <Input
-    type = "text"
-    placeholder = "Vivin"
-    />
-  )
+  const { fieldType, iconSrc, iconAlt, placeholder} = props;
+
+  switch (fieldType){
+    case FormFieldType.INPUT:
+      return(
+        <div className='flex rounded-md border border-dark-500 bg-dark-400 '>
+          {iconSrc && (
+            <Image
+              src={iconSrc}
+              height={25}
+              width={25}
+              alt={iconAlt || 'icon'}
+              className='ml-3'
+            />
+          )}
+          <FormControl>
+            <Input
+              placeholder={placeholder}
+              {...field}
+              className="shad-input border-0"
+            />
+          </FormControl>
+        </div>
+      )
+    case FormFieldType.PHONE_INPUT:
+        return (
+          <FormControl>
+            <PhoneInput
+              defaultCountry="IN"
+              placeholder={props.placeholder}
+              international
+              withCountryCallingCode
+              value={field.value as  undefined}
+              onChange={field.onChange}
+              className="input-phone"
+            />
+          </FormControl>
+        )
+      default: 
+        break;
+  }
  }
+
 const CustomFormField = (props: CustomProps) => {
   const {control, fieldType, name, label} = props;
   return (
@@ -59,5 +97,6 @@ const CustomFormField = (props: CustomProps) => {
 
   )
 }
+
 
 export default CustomFormField

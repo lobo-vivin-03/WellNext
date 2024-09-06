@@ -16,12 +16,12 @@ export default function Home() {
           height={200}
           width={200}
           alt="logo"
-          className="mb-12 h-12 w-fit "
+          className="mb-4 h-13 w-fit "
           />
 
           <PatientForm/>
 
-          <div className="text-14-regular mt-20 flex justify-between">
+          <div className="text-14-regular mt-10 flex justify-between">
             <p className="justify-items-end text-dark-600 xltext-left">
             © 2024 WellNext
             </p>
